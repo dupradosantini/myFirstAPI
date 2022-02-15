@@ -36,8 +36,7 @@ public class Usuario implements Serializable {
     private String senha;
 
     //Constructor
-    public Usuario(Long id, String nome, String login, String senha){
-        this.id=id;
+    public Usuario(String nome, String login, String senha){
         this.nome=nome;
         this.login=login;
         this.senha=senha;
