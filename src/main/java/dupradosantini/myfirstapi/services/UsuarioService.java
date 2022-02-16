@@ -35,4 +35,9 @@ public class UsuarioService {
         return usuarioRepository.save(newObj);
 
     }
+
+    public Usuario create(Usuario obj) {
+        obj.setId(null); //Garantir que não haverá colisão de ID caso a pessoa passe o ID do usuario (não deveria)
+        return usuarioRepository.save(obj); //novamente o método save ja é implementado pelo JPA
+    }
 }

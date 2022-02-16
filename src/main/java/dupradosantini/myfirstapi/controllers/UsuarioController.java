@@ -6,7 +6,9 @@ import dupradosantini.myfirstapi.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController //Anotação que indica para a API que se trata de um controller
@@ -30,5 +32,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
         Usuario newObj = usuarioService.update(id,obj);
         return ResponseEntity.ok().body(newObj);
+     }
+     @PostMapping ("")                      //Informa que no corpo da requisição deve haver esse objeto como parametro.
+    public ResponseEntity<Usuario> create(@RequestBody Usuario obj){
+        Usuario newObj = usuarioService.create(obj);
+         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri(); //boa prática retornar a pagina do usuario criado
+         return ResponseEntity.created(uri).build();
      }
 }
