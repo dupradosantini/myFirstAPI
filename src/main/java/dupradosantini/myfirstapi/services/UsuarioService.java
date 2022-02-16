@@ -25,4 +25,14 @@ public class UsuarioService {
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
+
+    public Usuario update(Long id, Usuario obj) {
+        //checar se o ID existe
+        Usuario newObj = findById(id); // Se houver retorno ou será o usuario ou o nosso erro personalizado
+        newObj.setNome(obj.getNome());
+        newObj.setLogin(obj.getLogin());
+        newObj.setSenha(obj.getSenha());
+        return usuarioRepository.save(newObj);
+
+    }
 }

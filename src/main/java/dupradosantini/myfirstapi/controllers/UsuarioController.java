@@ -5,10 +5,7 @@ import dupradosantini.myfirstapi.domain.Usuario;
 import dupradosantini.myfirstapi.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,10 @@ public class UsuarioController {
      public ResponseEntity<List<Usuario>> findAll(){ //Método retorna uma lista de tds usuarios
         List<Usuario> list = usuarioService.findAll();
         return ResponseEntity.ok().body(list);
+     }
+     @PutMapping(value =  "/{id}")
+    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
+        Usuario newObj = usuarioService.update(id,obj);
+        return ResponseEntity.ok().body(newObj);
      }
 }
