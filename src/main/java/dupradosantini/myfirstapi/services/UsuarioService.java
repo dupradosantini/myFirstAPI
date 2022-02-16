@@ -40,4 +40,9 @@ public class UsuarioService {
         obj.setId(null); //Garantir que não haverá colisão de ID caso a pessoa passe o ID do usuario (não deveria)
         return usuarioRepository.save(obj); //novamente o método save ja é implementado pelo JPA
     }
+
+    public void delete(Long id) {
+        findById(id); // checagem se o ID existe.
+        usuarioRepository.deleteById(id); //também já implementado pelo JPA.
+    }
 }

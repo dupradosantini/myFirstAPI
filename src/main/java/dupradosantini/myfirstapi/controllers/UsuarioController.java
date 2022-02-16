@@ -29,14 +29,19 @@ public class UsuarioController {
         return ResponseEntity.ok().body(list);
      }
      @PutMapping(value =  "/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
+     public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
         Usuario newObj = usuarioService.update(id,obj);
         return ResponseEntity.ok().body(newObj);
      }
      @PostMapping ("")                      //Informa que no corpo da requisição deve haver esse objeto como parametro.
-    public ResponseEntity<Usuario> create(@RequestBody Usuario obj){
+     public ResponseEntity<Usuario> create(@RequestBody Usuario obj){
         Usuario newObj = usuarioService.create(obj);
          URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri(); //boa prática retornar a pagina do usuario criado
          return ResponseEntity.created(uri).build();
+     }
+     @DeleteMapping(value = "/{id}")
+     public ResponseEntity<Void> delete(@PathVariable Long id){
+        usuarioService.delete(id);
+        return ResponseEntity.noContent().build();
      }
 }
