@@ -3,6 +3,7 @@ package dupradosantini.myfirstapi.services;
 import dupradosantini.myfirstapi.domain.Usuario;
 import dupradosantini.myfirstapi.repositories.UsuarioRepository;
 
+import dupradosantini.myfirstapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class UsuarioService {
 
     public Usuario findById(Long id){
         Optional<Usuario> obj = usuarioRepository.findById(id);//findById já é implementado para repositorios JPA
-
-        return obj.orElse(null); //retorna o objeto, se ele for vazio retorna null
+        //Throw com classe anonima passando a mensagem conforme estruturada aqui
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id +", Tipo: " + Usuario.class.getName())); //retorna o objeto, se ele for vazio retorna null
     }
 }
