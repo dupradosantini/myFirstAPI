@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController //Anotação que indica para a API que se trata de um controller
 @RequestMapping(value = "/usuarios")  //Anotacao que indica o mapeamento URI para acessar esse serviço
 public class UsuarioController {
@@ -21,5 +23,10 @@ public class UsuarioController {
      public ResponseEntity<Usuario> findById(@PathVariable Long id){
         Usuario usuarioObj = this.usuarioService.findById(id);
         return ResponseEntity.ok(usuarioObj);
+     }
+     @GetMapping
+     public ResponseEntity<List<Usuario>> findAll(){ //Método retorna uma lista de tds usuarios
+        List<Usuario> list = usuarioService.findAll();
+        return ResponseEntity.ok().body(list);
      }
 }

@@ -7,6 +7,7 @@ import dupradosantini.myfirstapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service // indica ao spring que é um serviço
@@ -19,5 +20,9 @@ public class UsuarioService {
         Optional<Usuario> obj = usuarioRepository.findById(id);//findById já é implementado para repositorios JPA
         //Throw com classe anonima passando a mensagem conforme estruturada aqui
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id +", Tipo: " + Usuario.class.getName())); //retorna o objeto, se ele for vazio retorna null
+    }
+
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
     }
 }
